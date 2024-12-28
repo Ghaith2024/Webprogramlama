@@ -1,0 +1,120 @@
+﻿@* @model BarberApp.Models.LoginViewModel
+
+<h2>Giriş Yap</h2>
+
+<form asp-action="Login" method="post">
+    <div class="form-group">
+        <label asp-for="UserName" class="control-label"></label>
+        <input asp-for="UserName" class="form-control" />
+        <span asp-validation-for="UserName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Password" class="control-label"></label>
+        <input asp-for="Password" class="form-control" type="password" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="RememberMe"></label>
+        <input asp-for="RememberMe" type="checkbox" />
+        <span asp-validation-for="RememberMe" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Giriş Yap</button>
+</form>
+
+<a href="@Url.Action("Register", "Account")">Üye Ol</a>
+
+ *@
+
+@model BarberApp.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Giriş Yap";
+}
+
+<div class="container d-flex justify-content-center align-items-center min-vh-0">
+    <div class="card shadow-lg p-4" style="max-width: 900px; width: 100%; border-radius: 15px;">
+        <h2 class="text-center mb-4">Giriş Yap</h2>
+
+        <form asp-action="Login" method="post">
+            <div class="form-group mb-3">
+                <label asp-for="UserName" class="form-label">Kullanıcı Adı</label>
+                <input asp-for="UserName" class="form-control form-control-lg" placeholder="Kullanıcı Adınızı Girin" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Password" class="form-label">Şifre</label>
+                <input asp-for="Password" class="form-control form-control-lg" type="password" placeholder="Şifrenizi Girin" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-check mb-4">
+                <input asp-for="RememberMe" type="checkbox" class="form-check-input" id="rememberMe" />
+                <label class="form-check-label" for="rememberMe">Beni Hatırla</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg w-100">Giriş Yap</button>
+        </form>
+
+        <div class="text-center mt-4">
+            <a href="@Url.Action("Register", "Account")" class="text-muted">Hesabınız yok mu? Üye Olun</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .container {
+        /* margin-top: 50px; */
+    }
+
+    .card {
+        border-radius: 15px;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+        padding: 40px;
+        background-color: #ffffff;
+    }
+
+    .form-control-lg {
+        font-size: 1.1rem;
+        padding: 15px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        padding: 15px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-radius: 8px;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+    .form-check-input {
+        margin-top: 10px;
+    }
+
+    .form-check-label {
+        font-size: 1rem;
+    }
+
+    .text-center a {
+        font-size: 1rem;
+        text-decoration: none;
+        color: #007bff;
+    }
+
+        .text-center a:hover {
+            text-decoration: underline;
+        }
+
+    .text-danger {
+        font-size: 0.875rem;
+    }
+</style>

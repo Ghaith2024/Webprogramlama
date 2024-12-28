@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Gemini Saç Modeli Önerileri";
+}
+
+<div style="display: flex; flex-direction: column; align-items: center; font-family: 'Roboto', sans-serif; padding: 20px; background: linear-gradient(135deg, #1f1c2c, #928dab); min-height: 100vh; color: #f8f8f8;">
+    <h1 style="color: #50fa7b; font-size: 2.5rem; margin-bottom: 30px; text-align: center;">
+        ⚡ Gemini Saç Modeli Önerileri ⚡
+    </h1>
+
+    <form method="post" style="width: 100%; max-width: 600px; padding: 20px; background: rgba(255, 255, 255, 0.1); border-radius: 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); backdrop-filter: blur(10px);">
+        <label for="description" style="font-size: 1rem; font-weight: bold; color: #8be9fd; margin-bottom: 10px; display: block;">
+            Açıklama Girin:
+        </label>
+        <input type="text"
+               id="description"
+               name="description"
+               placeholder="Örneğin: kıvırcık saç"
+               style="width: 100%; padding: 12px; font-size: 1rem; border: 2px solid #6272a4; border-radius: 8px; outline: none; margin-bottom: 20px; background: rgba(255, 255, 255, 0.2); color: #f8f8f8;"
+               required />
+        <button type="submit"
+                style="width: 100%; padding: 12px; font-size: 1.2rem; font-weight: bold; color: #1f1c2c; background: #50fa7b; border: none; border-radius: 8px; cursor: pointer; transition: background 0.3s;">
+            Öneri Al
+        </button>
+    </form>
+
+    @if (ViewBag.Error != null)
+    {
+        <div style="margin-top: 20px; padding: 15px; width: 100%; max-width: 600px; background: #ff5555; color: white; border-radius: 8px; text-align: center;">
+            <strong>Hata:</strong> @ViewBag.Error
+        </div>
+    }
+
+    @if (ViewBag.SuggestionsList != null)
+    {
+        <div style="margin-top: 30px; width: 100%; max-width: 800px; padding: 20px; background: rgba(255, 255, 255, 0.1); border-radius: 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); backdrop-filter: blur(10px);">
+            <h2 style="font-size: 1.8rem; font-weight: bold; color: #8be9fd; text-align: center; margin-bottom: 20px;">
+                Saç Modeli Önerileri
+            </h2>
+            <ul style="list-style: none; padding: 0;">
+                @foreach (var suggestion in ViewBag.SuggestionsList)
+                {
+                    <li style="margin-bottom: 15px; padding: 15px; background: rgba(0, 0, 0, 0.5); border: 2px solid #6272a4; border-radius: 8px; font-size: 1rem; color: #f8f8f8;">
+                        @Html.Raw(suggestion.Replace("\n", "<br />"))
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+</div>

@@ -1,0 +1,182 @@
+﻿@model IEnumerable<BarberApp.Models.Appointment>
+
+<h2 class="text-center text-primary mb-4">Randevularım</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["ErrorMessage"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<div class="card shadow-sm p-4" style="border-radius: 15px; overflow-x: auto;">
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Tarih</th>
+                <th>Çalışan</th>
+                <th>Durum</th>
+                <th>Ücret</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var appointment in Model)
+            {
+                <tr>
+                    <td>@appointment.AppointmentDate.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@appointment.Employee.Name</td>
+                  @*   <td class="text-@(appointment.IsConfirmed ? "success" : "warning")">
+                        @(appointment.IsConfirmed ? "Onaylandı" : "Beklemede")
+                    </td> *@
+                    <td>
+                        @if (appointment.IsConfirmed)
+                        {
+                            <div class="status-label status-confirmed">Onaylandı</div>
+                        }
+                        else
+                        {
+                            <div class="status-label status-pending">Beklemede</div>
+                        }
+                    </td>
+                    <td>@appointment.TotalPrice.ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<style>
+    /* Kart ve Kapsayıcı */
+    .card {
+        border-radius: 15px;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    /* Tablo */
+    .table {
+        font-size: 1rem;
+        border-radius: 8px;
+        overflow: hidden;
+        margin-top: 20px;
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #f9f9f9;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #f4f6fc;
+        cursor: pointer;
+    }
+
+    .thead-light th {
+        background-color: #e9ecef;
+        color: #495057;
+    }
+
+    th, td {
+        padding: 15px;
+        text-align: left;
+    }
+
+    /* Uyarılar */
+    .alert {
+        margin-bottom: 20px;
+        font-size: 1rem;
+        border-radius: 5px;
+    }
+
+        .alert .close {
+            padding: 0.8rem 1rem;
+        }
+
+    .alert-success {
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+        color: #155724;
+    }
+
+    .alert-danger {
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+        color: #721c24;
+    }
+
+    /* Butonlar */
+    .btn {
+        font-size: 0.875rem;
+        padding: 8px 16px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
+    }
+
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+
+    .btn-warning {
+        background-color: #ffc107;
+        border-color: #ffc107;
+    }
+
+        .btn-warning:hover {
+            background-color: #e0a800;
+            border-color: #d39e00;
+        }
+
+    .btn-danger {
+        background-color: #dc3545;
+        border-color: #dc3545;
+    }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+
+    .btn-sm {
+        padding: 5px 10px;
+    }
+
+    .status-label {
+        display: inline-block;
+        padding: 8px 12px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: white;
+        border-radius: 5px;
+        text-align: center;
+        min-width: 100px; /* Sabit genişlik */
+    }
+
+    .status-confirmed {
+        background-color: #28a745; /* Yeşil */
+    }
+
+    .status-pending {
+        background-color: #ffc107; /* Sarı */
+        color: #212529; /* Siyah metin */
+    }
+</style>
